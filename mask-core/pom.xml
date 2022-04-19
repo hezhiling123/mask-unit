@@ -18,7 +18,7 @@
     <artifactId>mask-core</artifactId>
     <version>1.2.7</version>
     <packaging>jar</packaging>
-    <name>hsaf-core</name>
+    <name>mask-core</name>
 
     <dependencies>
         <dependency>
