@@ -1,5 +1,5 @@
 
-package cn.mask.core.bizcode.impl;
+package cn.mask.mask.common.core.bizcode.impl;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -10,9 +10,9 @@ import java.util.Map;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
-import cn.mask.core.bizcode.BizCodeRootVo;
-import cn.mask.core.bizcode.BizCodeVo;
-import cn.mask.core.bizcode.MaskBizCodeMapper;
+import cn.mask.mask.common.core.bizcode.BizCodeRootVo;
+import cn.mask.mask.common.core.bizcode.BizCodeVo;
+import cn.mask.mask.common.core.bizcode.MaskBizCodeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;

@@ -1,4 +1,4 @@
-package cn.mask.core.bizcode;
+package cn.mask.mask.common.core.bizcode;
 
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;

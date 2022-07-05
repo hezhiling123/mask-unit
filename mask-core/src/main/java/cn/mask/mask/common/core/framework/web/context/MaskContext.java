@@ -1,6 +1,6 @@
-package cn.mask.core.framework.web.context;
+package cn.mask.mask.common.core.framework.web.context;
 
-import cn.mask.core.framework.utils.CurrentUser;
+import cn.mask.mask.common.core.framework.utils.CurrentUser;
 
 import java.io.Serializable;
 import java.util.Map;

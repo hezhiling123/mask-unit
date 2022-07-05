@@ -1,7 +1,7 @@
-package cn.mask.core.framework.web.context.impl;
+package cn.mask.mask.common.core.framework.web.context.impl;
 
-import cn.mask.core.framework.utils.CurrentUser;
-import cn.mask.core.framework.web.context.MaskContext;
+import cn.mask.mask.common.core.framework.web.context.MaskContext;
+import cn.mask.mask.common.core.framework.utils.CurrentUser;
 
 import java.util.HashMap;
 import java.util.Map;

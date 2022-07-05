@@ -1,4 +1,4 @@
-package cn.mask.core.framework.web;
+package cn.mask.mask.common.core.framework.web;
 
 import java.io.Serializable;
 

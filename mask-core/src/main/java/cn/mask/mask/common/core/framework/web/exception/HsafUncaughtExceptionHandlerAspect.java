@@ -1,4 +1,4 @@
-package cn.mask.core.framework.web.exception;
+package cn.mask.mask.common.core.framework.web.exception;
 
 import org.aspectj.lang.JoinPoint;
 import org.springframework.beans.factory.annotation.Autowired;

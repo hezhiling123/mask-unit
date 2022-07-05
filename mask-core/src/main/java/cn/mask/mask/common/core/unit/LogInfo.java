@@ -3,7 +3,7 @@
 // (powered by Fernflower decompiler)
 //
 
-package cn.mask.core.unit;
+package cn.mask.mask.common.core.unit;
 
 import java.io.Serializable;
 

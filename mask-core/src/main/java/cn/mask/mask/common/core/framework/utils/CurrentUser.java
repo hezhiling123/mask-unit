@@ -1,4 +1,4 @@
-package cn.mask.core.framework.utils;
+package cn.mask.mask.common.core.framework.utils;
 
 import java.io.Serializable;
 import java.util.HashMap;

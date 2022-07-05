@@ -1,10 +1,9 @@
-package cn.mask.core.framework.web.exception;
+package cn.mask.mask.common.core.framework.web.exception;
 
-import cn.mask.core.framework.web.WrapperResponse;
-import cn.mask.core.framework.web.context.MaskContextHolder;
-import cn.mask.core.framework.web.exception.MaskException;
-import cn.mask.core.unit.LogContext;
-import cn.mask.core.unit.MaskLogHandler;
+import cn.mask.mask.common.core.framework.web.WrapperResponse;
+import cn.mask.mask.common.core.framework.web.context.MaskContextHolder;
+import cn.mask.mask.common.core.unit.LogContext;
+import cn.mask.mask.common.core.unit.MaskLogHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**

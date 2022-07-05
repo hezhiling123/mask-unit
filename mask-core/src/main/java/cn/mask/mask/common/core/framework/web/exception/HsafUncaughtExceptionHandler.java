@@ -1,4 +1,4 @@
-package cn.mask.core.framework.web.exception;
+package cn.mask.mask.common.core.framework.web.exception;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 import org.slf4j.Logger;

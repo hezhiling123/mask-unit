@@ -1,4 +1,4 @@
-package cn.mask.core.unit;
+package cn.mask.mask.common.core.unit;
 
 
 import java.text.SimpleDateFormat;
@@ -6,10 +6,10 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.UUID;
 
-import cn.mask.core.bizcode.MaskBizCodeMapper;
-import cn.mask.core.framework.utils.CurrentUser;
-import cn.mask.core.framework.web.WrapperResponse;
-import cn.mask.core.framework.web.context.MaskContextHolder;
+import cn.mask.mask.common.core.bizcode.MaskBizCodeMapper;
+import cn.mask.mask.common.core.framework.web.WrapperResponse;
+import cn.mask.mask.common.core.framework.web.context.MaskContextHolder;
+import cn.mask.mask.common.core.framework.utils.CurrentUser;
 import com.alibaba.fastjson.JSONObject;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;

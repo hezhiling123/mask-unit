@@ -3,7 +3,7 @@
 // (powered by Fernflower decompiler)
 //
 
-package cn.mask.core.bizcode;
+package cn.mask.mask.common.core.bizcode;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
