@@ -2,6 +2,7 @@ package cn.mask.mask.common.core.framework.web.exception;
 
 import cn.mask.mask.common.core.framework.web.WrapperResponse;
 import cn.mask.mask.common.core.framework.web.context.MaskContextHolder;
+import cn.mask.mask.common.core.framework.web.enums.ResultCode;
 import cn.mask.mask.common.core.unit.LogContext;
 import cn.mask.mask.common.core.unit.MaskLogHandler;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.UndeclaredThrowableException;
@@ -29,13 +31,13 @@ public class MaskHandlerExceptionResolver extends AbstractHandlerExceptionResolv
     private String defaultErrorMessage;
     private final Map<Integer, String> exceptionMappings = new HashMap<>();
     private final Map<String, String> userDefinedExceptions = new HashMap<>();
-    private final Map<String, Integer> ude_errCode = new HashMap<>();
+    private final Map<String, String> ude_errCode = new HashMap<>();
     private final Map<String, String> ude_errMsg = new HashMap<>();
     private final String LOG_CONTEXT_KEY = "_logContext";
 
-    @Autowired
+    @Resource
     ExceptionSeq exceptionSeq;
-    @Autowired
+    @Resource
     MaskLogHandler maskLogHandler;
 
     public MaskHandlerExceptionResolver() {
@@ -49,7 +51,7 @@ public class MaskHandlerExceptionResolver extends AbstractHandlerExceptionResolv
     @Override
     protected ModelAndView doResolveException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception ex) {
         ModelAndView mv;
-        Integer errorCode = WrapperResponse.FAIL;
+        String errorCode = ResultCode.SYS_ERR.getCode();
         LogContext logContext = (LogContext) MaskContextHolder.getContext().getProperty(this.LOG_CONTEXT_KEY);
         String traceID = "";
         String traceInfo = "[MaskException]";
@@ -66,15 +68,15 @@ public class MaskHandlerExceptionResolver extends AbstractHandlerExceptionResolv
         if (ex.getCause() != null) {
             viewName = ex.getCause().getClass().getName();
             if (this.ude_errCode.containsKey(viewName)) {
-                errorCode = (Integer) this.ude_errCode.get(viewName);
+                errorCode = this.ude_errCode.get(viewName);
                 exmsg = (String) this.ude_errMsg.get(viewName);
                 this.log.error(this.maskLogHandler.getBaseLogString() + traceInfo + ",异常流水号exseq=" + exseq + ",错误码=" + errorCode + ",错误信息:" + exmsg, ex.getCause());
                 ex_match = true;
             }
         }
         if (!ex_match && this.ude_errCode.containsKey(ex_clz)) {
-            errorCode = (Integer) this.ude_errCode.get(ex_clz);
-            exmsg = (String) this.ude_errMsg.get(ex_clz);
+            errorCode = this.ude_errCode.get(ex_clz);
+            exmsg = this.ude_errMsg.get(ex_clz);
             this.log.error(this.maskLogHandler.getBaseLogString() + traceInfo + ",异常流水号exseq=" + exseq + ",错误码=" + errorCode + ",错误信息:" + exmsg, ex);
             ex_match = true;
         }
@@ -82,26 +84,26 @@ public class MaskHandlerExceptionResolver extends AbstractHandlerExceptionResolv
             if (ex instanceof UndeclaredThrowableException) {
                 Throwable undeclaredThrowable = ((UndeclaredThrowableException) ex).getUndeclaredThrowable();
                 if (undeclaredThrowable instanceof MaskException) {
-                    Integer code = ((MaskException) undeclaredThrowable).getCode();
+                    String code = ((MaskException) undeclaredThrowable).getCode();
                     exmsg = ((MaskException) undeclaredThrowable).getMsg();
                     errorCode = code;
                 }
             } else {
-                int code;
+                String code;
                 if (ex instanceof MaskException) {
                     code = ((MaskException) ex).getCode();
                     exmsg = ((MaskException) ex).getMsg();
                     errorCode = code;
                     this.log.error(this.maskLogHandler.getBaseLogString() + traceInfo + ",异常流水号exseq=" + exseq + ",错误码=" + errorCode + ",错误信息:" + exmsg, ex);
                 } else if (ex.getCause() == null) {
-                    this.log.error(this.maskLogHandler.getBaseLogString()  + traceInfo + ",异常流水号exseq=" + exseq + ",错误码=" + errorCode + ",错误信息:" + ex.getMessage(), ex);
+                    this.log.error(this.maskLogHandler.getBaseLogString() + traceInfo + ",异常流水号exseq=" + exseq + ",错误码=" + errorCode + ",错误信息:" + ex.getMessage(), ex);
                 } else if (ex.getCause() instanceof MaskException) {
-                    code = ((MaskException)ex.getCause()).getCode();
-                    exmsg = ((MaskException)ex.getCause()).getMessage();
+                    code = ((MaskException) ex.getCause()).getCode();
+                    exmsg = ((MaskException) ex.getCause()).getMessage();
                     errorCode = code;
                     this.log.error(this.maskLogHandler.getBaseLogString() + traceInfo + ",异常流水号exseq=" + exseq + ",错误码=" + errorCode + ",错误信息:" + exmsg, ex.getCause());
                 } else {
-                    this.log.error(this.maskLogHandler.getBaseLogString() +  traceInfo + ",异常流水号exseq=" + exseq + ",错误码=" + errorCode + ",错误信息:" + ex.getMessage(), ex.getCause());
+                    this.log.error(this.maskLogHandler.getBaseLogString() + traceInfo + ",异常流水号exseq=" + exseq + ",错误码=" + errorCode + ",错误信息:" + ex.getMessage(), ex.getCause());
                 }
             }
         }
@@ -130,6 +132,7 @@ public class MaskHandlerExceptionResolver extends AbstractHandlerExceptionResolv
     private String getExceptionClz(Exception ex) {
         return ex.getClass().getName();
     }
+
     public void setViewType(String viewType) {
         this.viewType = viewType;
     }
@@ -154,7 +157,7 @@ public class MaskHandlerExceptionResolver extends AbstractHandlerExceptionResolv
                 if (!v.contains("|")) {
                     this.log.error("无效的自定义异常拦截配置，ex_clz=" + k + ";ex_msg=" + v);
                 } else {
-                    this.ude_errCode.put(k, Integer.parseInt(v.substring(0, v.indexOf("|"))));
+                    this.ude_errCode.put(k, v.substring(0, v.indexOf("|")));
                     this.ude_errMsg.put(k, v.substring(v.indexOf("|") + 1));
                 }
             }
@@ -167,7 +170,7 @@ public class MaskHandlerExceptionResolver extends AbstractHandlerExceptionResolv
         if (!ex_msg.contains("|")) {
             this.log.error("无效的自定义异常拦截配置，ex_clz=" + ex_clz + ";ex_msg=" + ex_msg);
         } else {
-            this.ude_errCode.put(ex_clz, Integer.parseInt(ex_msg.substring(0, ex_msg.indexOf("|"))));
+            this.ude_errCode.put(ex_clz, ex_msg.substring(0, ex_msg.indexOf("|")));
             this.ude_errMsg.put(ex_clz, ex_msg.substring(ex_msg.indexOf("|") + 1));
         }
 

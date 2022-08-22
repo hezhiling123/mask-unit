@@ -5,42 +5,38 @@
 
 package cn.mask.mask.common.core.framework.web.exception;
 
+import cn.mask.mask.common.core.framework.web.enums.ResultCode;
+
 public class MaskException extends Exception {
-    private Integer code;
+    private String code;
     private String msg;
 
     public MaskException(Throwable t) {
         super(t);
-        this.msg = ResultStatusCode.HTTP_ERROR_500.getMsg();
-        this.code = ResultStatusCode.HTTP_ERROR_500.getCode();
+        this.code = ResultCode.SYS_ERR.getCode();
+        this.msg = ResultCode.SYS_ERR.getMsg();
     }
 
-    public MaskException(String msg) {
-        super(msg);
+    public MaskException(ResultCode resultCode, String msg) {
+        this.code = resultCode.getCode();
         this.msg = msg;
-        this.code = ResultStatusCode.HTTP_ERROR_400.getCode();
     }
 
-    public MaskException(ResultStatusCode resultStatusCode) {
-        this.msg = resultStatusCode.getMsg();
-        this.code = resultStatusCode.getCode();
-    }
-
-    public MaskException(Integer code, String msg) {
-        this.msg = msg;
+    public MaskException(String code, String msg) {
         this.code = code;
+        this.msg = msg;
     }
 
-    public MaskException(ResultStatusCode resultStatusCode, String msg) {
-        this.code = resultStatusCode.getCode();
-        this.msg = resultStatusCode.getMsg();
+    public MaskException(ResultCode resultCode) {
+        this.code = resultCode.getCode();
+        this.msg = resultCode.getMsg();
     }
 
-    public Integer getCode() {
+    public String getCode() {
         return this.code;
     }
 
-    public void setCode(Integer code) {
+    public void setCode(String code) {
         this.code = code;
     }
 

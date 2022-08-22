@@ -16,7 +16,7 @@
 
     <groupId>cn.mask.mask.common</groupId>
     <artifactId>mask-core</artifactId>
-    <version>1.2.7</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>mask-core</name>
 

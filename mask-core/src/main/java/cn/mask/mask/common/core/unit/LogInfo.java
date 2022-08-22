@@ -21,7 +21,7 @@ public class LogInfo implements Serializable {
     private String requestParams;
     private Long timeConsuming;
     private String callFrom;
-    private Integer code;
+    private String code;
 
     public LogInfo() {
     }
@@ -136,6 +136,7 @@ public class LogInfo implements Serializable {
         return sb.toString();
     }
 
+    @Override
     public String toString() {
         return "LogInfo [traceID=" + this.traceID + ", userAcctId=" + this.userAcctId + ", requestTime=" + this.requestTime + ", requestUrl=" + this.requestUrl + ", requestUri=" + this.requestUri + ", requestMethod=" + this.requestMethod + ", clientIP=" + this.clientIP + ", clazz=" + this.clazz + ", classMethod=" + this.classMethod + ", requestParams=" + this.requestParams + ", timeConsuming=" + this.timeConsuming + ", callFrom=" + this.callFrom + ", code=" + this.code + "]";
     }
@@ -148,11 +149,11 @@ public class LogInfo implements Serializable {
         this.timeConsuming = timeConsuming;
     }
 
-    public Integer getCode() {
+    public String getCode() {
         return this.code;
     }
 
-    public void setCode(Integer code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
