@@ -15,27 +15,27 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BasePO {
-    private String crtorId;
-    private String crtorName;
+    private String crterId;
+    private String crterName;
     private Date crteTime;
     private String updterId;
     private String updterName;
     private Date updtTime;
 
-    public String getCrtorId() {
-        return crtorId;
+    public String getCrterId() {
+        return crterId;
     }
 
-    public void setCrtorId(String crtorId) {
-        this.crtorId = crtorId == null ? null : crtorId.trim();
+    public void setCrterId(String crterId) {
+        this.crterId = crterId == null ? null : crterId.trim();
     }
 
-    public String getCrtorName() {
-        return crtorName;
+    public String getCrterName() {
+        return crterName;
     }
 
-    public void setCrtorName(String crtorName) {
-        this.crtorName = crtorName == null ? null : crtorName.trim();
+    public void setCrterName(String crterName) {
+        this.crterName = crterName == null ? null : crterName.trim();
     }
 
     public Date getCrteTime() {
