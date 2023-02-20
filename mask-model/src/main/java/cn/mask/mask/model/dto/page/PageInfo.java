@@ -2,6 +2,7 @@ package cn.mask.mask.model.dto.page;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 /**
@@ -15,13 +16,15 @@ public class PageInfo implements Serializable {
     /**
      * 页数
      */
+    @NotEmpty(message = "页数不可为空")
     private int pageNum;
     /**
      * 每页数量
      */
+    @NotEmpty(message = "每页数量不可为空")
     private int pageSize;
     /**
-     * 总数量
+     * 当前页数据量
      */
     private int size;
     /**

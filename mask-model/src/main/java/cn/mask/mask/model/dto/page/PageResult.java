@@ -28,11 +28,11 @@ public class PageResult<T> implements Serializable {
     /**
      * 开始行
      */
-    private int startRow;
+    private long startRow;
     /**
      * 结束行
      */
-    private int endRow;
+    private long endRow;
     /**
      * 页数
      */
